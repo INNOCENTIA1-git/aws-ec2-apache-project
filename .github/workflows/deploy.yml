@@ -16,18 +16,18 @@ jobs:
     - name: Copy files to EC2
       uses: appleboy/scp-action@v0.1.7
       with:
-        host: ${{ secrets.EC2-HOST }}
-        username: ${{ secrets.EC2-USER }}
-        key: ${{ secrets.EC2-SSH-KEY }}
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
         source: "./"
         target: "/home/ubuntu/app"
 
     - name: Deploy on EC2 server
       uses: appleboy/ssh-action@v0.1.7
       with:
-        host: ${{ secrets.EC2-HOST }}
-        username: ${{ secrets.EC2-USER }}
-        key: ${{ secrets.EC2-SSH-KEY }}
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           sudo cp -r /home/ubuntu/app/* /var/www/html/
           sudo systemctl restart apache2
